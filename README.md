@@ -1,9 +1,30 @@
-# React + Vite
+# ViewSonic Assignment 2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### 1. 滿版首屏呈現
 
-Currently, two official plugins are available:
+![image](./src/assets/index.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-# viewsonic2
+### 2. Pokemon 卡片特效
+
+- 動畫流程：點擊事件呈現 3D 旋轉效果
+1. 當使用者 hover 過卡片正面時，會以 Y 軸為基準旋轉 5 度，且會自動回復成 0 度。
+2. 當使用者點擊卡片正面時，會以 Y 軸為基準旋轉 180 度；點擊卡片反面時，會反轉 180 度成正面。
+- 困難：若卡片 hover 尚未回復成 0 度就點擊卡片，要流暢達成旋轉 180 度，但一開始把 isFlipped 這個 state 和 hover 樣式寫在一起，發現卡片瞬間彈回 0 度再旋轉 180 度。
+- 解決：把 hover 樣式寫在 card front 上，而旋轉 180 度寫在 card container 上。
+
+### 3. 地圖
+
+- 動畫流程：滾動事件
+1. 一開始只有世界地圖圖片、資料來源、地點，並且會固定在畫面最上方(pin)。
+2. 出現世界各地地名後，箭頭會連到台灣。
+3. 地名消失後，箭頭跟地點消失。
+4. 出現動物1→消失；出現動物2→消失；出現動物3→消失；
+- 觀察：透過 dev tool 觀察，以上物件都是 svg 圖重疊，當滾動滑鼠時，除了箭頭是透過 strokeDashoffset 的方式延伸，其他都是透過透明度呈現動畫。
+- 困難與解決：因為箭頭會透過 svg 內的屬性(strokeDashoffset)調整，所以將 svg 建立成元件，再搭配 GSAP 建立 timeline 製作動畫效果。
+
+### 4. 流程圖
+
+1. 使用者滾動時，文字與箭頭會依序出現。
+2. 文字與箭頭會集中在畫面中央位置附近出現。
+- 觀察：透過 dev tool 觀察，當滾動滑鼠，以上物件也是 svg 圖，當滾動滑鼠，箭頭會依據 offset(0~100%) 的值對照 linearGradient 中的顏色。而文字則是由多個 path 組成，依據出現順序來規劃 timeline 動畫。
+- 困難與解決：一開始配置好 GSAP 後滾動畫面，顏色都顯示不出來，後來發現是要在 svg 中的 path 加入  fill="url(#chartGradient)" 顏色才會吃到 linearGradient 的值。

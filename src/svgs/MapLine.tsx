@@ -1,4 +1,3 @@
-// Libraries
 import React from "react";
 
 const MapLine = () => {
@@ -11,7 +10,8 @@ const MapLine = () => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       data-v-74776bea=""
-      strokeDasharray="1280" strokeDashoffset="1280"
+      strokeDasharray="1280"
+      strokeDashoffset="1280"
     >
       <path
         d="M308.5 471.326C308.5 471.326 578 -22.0002 1025.5 282.5"

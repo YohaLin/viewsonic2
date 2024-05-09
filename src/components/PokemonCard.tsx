@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import React from "react";
 import { useCallback, useState } from "react";
+import createImageSet from "../libs/createImageSet";
 
 const PokemonCard = ({ pokemon }) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -13,22 +14,13 @@ const PokemonCard = ({ pokemon }) => {
     }
   }, []);
 
-  const createImageSet = (url, extensions = ["", "@2x", "@3x"]) => {
-    const imageSet = extensions
-      .map((ext, index) => {
-        return `"${url}${ext}.webp" ${index + 1}x`;
-      })
-      .join(", ");
-
-    return imageSet;
-  };
-
   return (
     <div
       className="group h-[calc((81.875vw-40px)/2.52)] max-h-[400px] perspective-600 drop-shadow-custom hover:cursor-pointer"
       onClick={() => setIsFlipped(!isFlipped)}
     >
       {/* card container */}
+      {/* card flip when clicked */}
       <div
         className={clsx(
           "relative h-full w-full transform-style-3d transition duration-1000 transform",
@@ -39,6 +31,7 @@ const PokemonCard = ({ pokemon }) => {
         )}
       >
         {/* card  front*/}
+        {/* card wiggle when hovered */}
         <div
           className="absolute flex flex-col gap-[18px] justify-end items-center h-full w-full rounded-md pb-6 text-center backface-hidden hover:animate-wiggle"
           style={{

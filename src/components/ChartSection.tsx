@@ -11,7 +11,6 @@ const ChartSection = () => {
   const container = useRef(null);
   gsap.registerPlugin(ScrollTrigger);
 
-  // store the timeline in a ref.
   const tl = useRef<gsap.core.Timeline | null>(null);
 
   useGSAP(
@@ -25,8 +24,8 @@ const ChartSection = () => {
             scrub: true,
           },
         })
-        // > means the same time from last element
-        // < means when last element is over, start
+        // "<" means the same time from last element
+        // ">" means when last element is over, start
         .to("#stop2", { attr: { offset: "100%" }, duration: 20 })
         .to("#stop3", { attr: { offset: "100%" }, duration: 20 }, "<")
         .fromTo(".pc-text1", { opacity: 0 }, { opacity: 1, duration: 1 }, "<")
