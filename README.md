@@ -1,4 +1,5 @@
 # ViewSonic Assignment 2
+以螢幕寬度 1440px 做呈現。
 
 ### 1. 滿版首屏呈現
 
